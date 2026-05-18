@@ -25,6 +25,50 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Docker Setup
+
+### Prerequisites
+- Docker and Docker Compose installed on your machine
+
+### Quick Start
+
+1. **Copy environment file:**
+```bash
+cp .env.example .env
+```
+
+2. **Run with Docker Compose:**
+```bash
+docker-compose up -d
+```
+
+This will:
+- Build and run the NestJS application
+- Start PostgreSQL database
+- Configure networking between services
+- Set up hot reload for development
+
+3. **Stop the containers:**
+```bash
+docker-compose down
+```
+
+4. **View logs:**
+```bash
+docker-compose logs -f app
+docker-compose logs -f postgres_local
+```
+
+### Environment Variables
+Configure your `.env` file with:
+- `POSTGRES_USER`: Database user
+- `POSTGRES_PASSWORD`: Database password
+- `POSTGRES_DB`: Database name
+- `POSTGRES_PORT`: Database port (default: 5432)
+- `NODE_ENV`: Environment (development/production)
+- `APP_PORT`: Application port (default: 3000)
+- `DATABASE_URL`: Full connection string
+
 ## Project setup
 
 ```bash
@@ -96,3 +140,25 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+---
+
+## Bookstore API
+
+This project includes a simple **books CRUD** implementation. The in-memory service exposes the following REST endpoints:
+
+- `GET /books` – list all books
+- `GET /books/:id` – retrieve a single book by ID
+- `POST /books` – create a new book (body: `{ title, author, publishedDate? }`)
+- `PUT /books/:id` – update a book
+- `DELETE /books/:id` – remove a book
+
+All payloads are validated using class-validator (global `ValidationPipe` enabled). Use `npm run start:dev` to run the server and interact with the API.
+
+Example call:
+
+```bash
+curl -X POST http://localhost:3000/books \
+  -H "Content-Type: application/json" \
+  -d '{"title": "1984", "author": "Orwell"}'
+```
