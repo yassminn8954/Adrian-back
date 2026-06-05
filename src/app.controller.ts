@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('config/google-books-api-key')
+  getGoogleBooksApiKey(): { apiKey: string } {
+    return this.appService.getGoogleBooksApiKey();
+  }
 }
